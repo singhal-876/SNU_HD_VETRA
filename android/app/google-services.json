@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "599652426160",
+    "project_id": "auth-c36ad",
+    "storage_bucket": "auth-c36ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:599652426160:android:47043c7a882fdfb6fff675",
+        "android_client_info": {
+          "package_name": "com.example.sphere"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOol-n5wM8Zh9_sMb7S6b3HwonFuA7zSI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

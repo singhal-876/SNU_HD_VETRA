@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>police</name>
+    <description/>
+    <NetworkLink>
+      <name>police</name>
+      <Link>
+        <href>https://www.google.com/maps/d/kml?mid=1AORRaGK7qbNgCQIExwbJWFdi4CBZUM4</href>
+      </Link>
+    </NetworkLink>
+  </Document>
+</kml>

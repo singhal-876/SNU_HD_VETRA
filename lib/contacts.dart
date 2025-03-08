@@ -1,42 +1,110 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 
 class Contact {
   String name;
   String number;
 
   Contact({required this.name, required this.number});
+
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'number': number,
+    };
+  }
+
+  factory Contact.fromMap(Map<String, dynamic> map) {
+    return Contact(
+      name: map['name'],
+      number: map['number'],
+    );
+  }
 }
 
 class ContactsManager extends StatefulWidget {
   const ContactsManager({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _ContactsManagerState createState() => _ContactsManagerState();
+  ContactsManagerState createState() => ContactsManagerState();
 }
 
-class _ContactsManagerState extends State<ContactsManager> {
-  final List<Contact> contacts = []; // Store added contacts
+class ContactsManagerState extends State<ContactsManager> {
+  List<Contact> contacts = [];
   final TextEditingController nameController = TextEditingController();
-  final TextEditingController numberController = TextEditingController();
+  String completePhoneNumber = '';
+  bool isValidPhoneNumber = false;
 
-  // Function to add a contact
-  void addContact() {
-    if (nameController.text.isNotEmpty && numberController.text.isNotEmpty) {
+  @override
+  void initState() {
+    super.initState();
+    loadContacts();
+  }
+
+  void loadContacts() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? contactsJson = prefs.getString('contacts');
+    if (contactsJson != null) {
+      List<dynamic> contactsList = jsonDecode(contactsJson);
       setState(() {
-        contacts.add(
-            Contact(name: nameController.text, number: numberController.text));
-        nameController.clear();
-        numberController.clear();
+        contacts =
+            contactsList.map((contact) => Contact.fromMap(contact)).toList();
       });
     }
   }
 
-  // Function to remove a contact
+  void saveContacts() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<Map<String, dynamic>> contactsList =
+        contacts.map((contact) => contact.toMap()).toList();
+    String contactsJson = jsonEncode(contactsList);
+    await prefs.setString('contacts', contactsJson);
+  }
+
+  void addContact() {
+    if (nameController.text.isNotEmpty && isValidPhoneNumber) {
+      setState(() {
+        contacts.add(
+            Contact(name: nameController.text, number: completePhoneNumber));
+        nameController.clear();
+        completePhoneNumber = '';
+        isValidPhoneNumber = false;
+      });
+      saveContacts();
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Contact added successfully")),
+      );
+    } else {
+      String errorMessage = "Please enter ";
+      if (nameController.text.isEmpty) errorMessage += "a name";
+      if (nameController.text.isEmpty && !isValidPhoneNumber) {
+        errorMessage += " and ";
+      }
+      if (!isValidPhoneNumber) errorMessage += "a valid 10-digit phone number";
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(errorMessage)),
+      );
+    }
+  }
+
   void removeContact(Contact contact) {
     setState(() {
       contacts.remove(contact);
     });
+    saveContacts();
+  }
+
+  // New method to get all contacts
+  List<Contact> getAllContacts() {
+    return contacts;
+  }
+
+  // New method to get the first contact
+  Contact? getFirstContact() {
+    return contacts.isNotEmpty ? contacts.first : null;
   }
 
   @override
@@ -44,11 +112,13 @@ class _ContactsManagerState extends State<ContactsManager> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Manage Contacts"),
-        backgroundColor: Colors.purple,
+        foregroundColor: const Color.fromARGB(255, 247, 244, 233),
+        iconTheme: const IconThemeData(
+          color: Colors.black,
+        ),
       ),
       body: Column(
         children: [
-          // Input fields for adding contact's name and number
           Container(
             padding: const EdgeInsets.all(10),
             child: Column(
@@ -61,19 +131,27 @@ class _ContactsManagerState extends State<ContactsManager> {
                   ),
                 ),
                 const SizedBox(height: 10),
-                TextField(
-                  controller: numberController,
+                IntlPhoneField(
                   decoration: const InputDecoration(
-                    labelText: 'Enter Contact Number',
-                    border: OutlineInputBorder(),
+                    labelText: 'Enter Phone Number',
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(),
+                    ),
                   ),
-                  keyboardType: TextInputType.phone,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                    FilteringTextInputFormatter.digitsOnly
+                  ],
+                  initialCountryCode: 'IN',
+                  onChanged: (phone) {
+                    completePhoneNumber = phone.completeNumber;
+                    isValidPhoneNumber = phone.number.length == 10;
+                  },
                 ),
               ],
             ),
           ),
-
-          // Add Contact Button
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: ElevatedButton(
@@ -81,8 +159,6 @@ class _ContactsManagerState extends State<ContactsManager> {
               child: const Text('Add Contact'),
             ),
           ),
-
-          // Display Contacts
           Expanded(
             child: contacts.isEmpty
                 ? const Center(child: Text("No contacts added yet"))

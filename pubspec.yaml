@@ -1,4 +1,4 @@
-name: sphere
+name: vetra
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -45,8 +45,11 @@ dependencies:
   google_maps_flutter: ^2.9.0
   webview_flutter: ^4.10.0
   tflite_flutter: ^0.11.0
-  firebase_database: ^11.1.5
+  # firebase_database: ^11.1.5
   intl: ^0.18.0 
+  vibration: ^1.7.4  
+  firebase_messaging: 15.1.4  # use the latest version
+  firebase_database: ^11.3.3
   # phone_caller: ^0.0.1
   # flutter_bluetooth_serial: ^0.4.0
   # telephony: ^0.2.0
@@ -54,6 +57,7 @@ dependencies:
   # flutter_sms: ^2.3.3
 
 dev_dependencies:
+  # flutter_launcher_icons: ^0.10.0
   flutter_test:
     sdk: flutter
 
@@ -63,17 +67,16 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
-  flutter_launcher_icons: "^0.14.1"
 
 flutter_icons:
-  image_path: "assets/images/icon.png"
+  image_path: "assets/images/logo.png"
   android: true
   ios: true
 
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/icon.png"
+  image_path: "assets/images/logo.png"
   min_sdk_android: 21 # android min sdk min:16, default 21
   web:
     generate: true
@@ -104,6 +107,7 @@ flutter:
     - assets/images/sphere.png
     - assets/images/bg_drawer_img.png
     - assets/images/watch.png
+    - assets/images/logo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

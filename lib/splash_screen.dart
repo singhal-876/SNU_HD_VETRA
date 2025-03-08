@@ -2,7 +2,7 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:sphere/main.dart';
+import 'package:vetra/main.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -27,10 +27,10 @@ class _splashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.pink[300],
+        color: Color(0xFF00A676),
         child: Center(
           child: Text(
-            "String",
+            "VETRA",
             style: TextStyle(
               fontSize: 40,
               fontWeight: FontWeight.w700,

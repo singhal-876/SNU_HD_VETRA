@@ -69,14 +69,18 @@ class ContactsManagerState extends State<ContactsManager> {
       setState(() {
         contacts.add(
             Contact(name: nameController.text, number: completePhoneNumber));
+        String addedName = nameController.text;
+        String addedNumber = completePhoneNumber;
         nameController.clear();
         completePhoneNumber = '';
         isValidPhoneNumber = false;
+        saveContacts();
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text(
+                  "Contact added successfully: $addedName - $addedNumber")),
+        );
       });
-      saveContacts();
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Contact added successfully")),
-      );
     } else {
       String errorMessage = "Please enter ";
       if (nameController.text.isEmpty) errorMessage += "a name";

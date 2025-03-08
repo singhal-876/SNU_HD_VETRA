@@ -1,0 +1,573 @@
+body {
+  background: linear-gradient(180deg,  #d8dad8, #DAF7DC); /* Soft light background */
+  background-attachment: fixed; /* Keeps the background fixed while scrolling */
+  background-size: cover; 
+}
+
+.anton-regular {
+    font-family: "Anton", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 30px;
+    color: black;
+    text-decoration: none;
+    position: relative;
+    font-family: "Poppins",sans-serif;
+}
+
+.nav-icon{
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-size: 30px;
+    font-style: normal;
+}
+
+.nav-menu{
+    display: flex;
+    align-items: center;
+    list-style: none;
+    font-size: 18px;
+    gap: 30px; /* Reduced gap for proper menu alignment */
+    text-decoration: none;
+}
+
+.nav-contact{
+    border-radius: 50px;
+    padding: 10px 38px;
+    background-color: #9EE493;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+    font-size: medium;
+}
+
+/* Home Section: Left Text, Right Image */
+.home {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 90vh;
+    padding: 0 10%;
+    padding-top: 40px; /* Adjusted top padding */
+    flex-wrap: wrap; /* Ensure content wraps on smaller screens */
+}
+
+/* Text Section */
+.info {
+    flex: 1;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #333; /* Dark gray for premium readability */
+    line-height: 1.2;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center vertically */
+    align-items: flex-start; /* Align text to the left */
+    padding-left: 50px; /* Adjust padding to align text left */
+    margin-bottom: 50px; /* Ensure spacing between text and button */
+}
+
+/* "VETRA" Title */
+.item1 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 100px;
+    background: linear-gradient(90deg, #64CBB3, #00A676);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 4px 8px rgba(100, 203, 179, 0.2);
+    position: relative;
+    animation: fadeInUp 1.2s ease-in-out forwards;
+    
+}
+
+/* AI-Driven */
+.item2 {
+    font-size: 55px;
+    color: #4A4A4A;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 1.5s ease-in-out forwards;
+}
+
+/* Wearable Safety Technology */
+.item3 {
+    font-size: 55px;
+    color: #666;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 1.8s ease-in-out forwards;
+}
+
+/* Subtle Fade-in Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Image Section */
+.image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+    margin-left: 20px; /* Adjust space between text and image */
+}
+
+.image img {
+    width: 90%;
+    max-width: 500px;
+    transition: transform 0.5s ease-in-out, filter 0.5s ease-in-out;
+    opacity: 0;
+    transform: translateX(50px);
+    animation: fadeInRight 1.2s ease-in-out forwards;
+}
+
+/* Hover Effect: Softer Glow */
+.image img:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0px 0px 15px rgba(100, 203, 179, 0.4));
+}
+
+/* Cool Fade-in Right Effect */
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Get Started Button Style */
+.button {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-top: 30px;
+}
+
+.button a {
+    padding: 18px 50px;
+    font-size: 22px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: #9EE493; /* Updated button color */
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    box-shadow: 0 8px 30px rgba(158, 228, 147, 0.3);
+    transition: all 0.3s ease-in-out;
+}
+
+.button a:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 40px rgba(158, 228, 147, 0.5); /* Hover shadow adjusted */
+    background: #8DC67D; /* Slightly darker shade of #9EE493 on hover */
+}
+
+
+
+
+/* Why VETRA Section */
+.why-vetra {
+  text-align: center;
+  padding: 120px 10%;
+ 
+}
+
+/* Main Heading */
+.section-heading {
+  font-family: "Poppins",sans-serif;
+  font-size: 50px;
+  font-weight: 700;
+  color: #00A676;
+  text-transform: uppercase;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 15px;
+  letter-spacing: 2px;
+  animation: fadeIn 1.2s ease-in-out forwards;
+}
+
+/* Highlight effect */
+.section-heading span {
+  color: #4A4A4A;
+  font-weight: 900;
+}
+
+/* Subheading */
+.section-subheading {
+  font-size: 20px;
+  color: #666;
+  margin-bottom: 60px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1.5s ease-in-out forwards;
+}
+
+/* Features Grid */
+.features {
+  font-family: "Poppins",sans-serif;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Feature Cards */
+.feature {
+  background: #d7f5b6;
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+  width: 320px;
+  transition: transform 0.6s ease-in-out, box-shadow 0.6s ease-in-out, rotate 0.4s ease-in-out;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(50px);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Feature Icons */
+.feature img {
+  width: 200px;
+  height: 150px;
+  margin-bottom: 20px;
+  transition: transform 0.4s ease-in-out;
+}
+
+/* Feature Titles */
+.feature h3 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #00A676;
+}
+
+/* Feature Descriptions */
+.feature p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Hover Effects */
+.feature:hover {
+  transform: scale(1.07) rotate(-2deg);
+  box-shadow: 0px 15px 30px rgba(158, 228, 147, 0.4);
+}
+
+.feature:hover img {
+  transform: scale(1.1);
+}
+
+/* Fade-in Animations */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+      opacity: 0;
+      transform: translateY(30px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Show Features when in View */
+.features.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.feature.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* How VETRA Works Section */
+.how-it-works {
+  text-align: center;
+  padding: 140px 10%;
+ font-family: "Poppins",sans-serif;
+}
+
+/* Main Heading */
+.how-it-works .section-heading {
+  font-size: 55px;
+  font-weight: 800;
+  color: #00775C;
+  text-transform: uppercase;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 25px;
+  letter-spacing: 2px;
+}
+
+/* Gradient Effect Under Heading */
+.how-it-works .section-heading span {
+  background: linear-gradient(45deg, #00A676, #9EE493);
+ -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Subheading */
+.how-it-works .section-subheading {
+  font-size: 22px;
+  color: #444;
+  margin-bottom: 70px;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+/* Step Container */
+.step-container {
+  display: flex;
+  flex-direction: column;
+  gap: 90px;
+}
+
+/* Step Box */
+.step {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 80px;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.6s ease-in-out;
+}
+
+/* Animate steps when they come into view */
+.step.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Left-aligned Step */
+.step-left {
+  flex-direction: row;
+}
+
+/* Right-aligned Step */
+.step-right {
+  flex-direction: row-reverse;
+}
+
+/* Step Images */
+.step img {
+  width: 42%;
+  max-width: 500px;
+  border-radius: 25px;
+  box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.15);
+  transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+}
+
+/* New hover effect with subtle rotation */
+.step img:hover {
+  transform: scale(1.08) rotate(2deg);
+  box-shadow: 0px 20px 40px rgba(0, 167, 118, 0.3);
+}
+
+/* Step Content */
+.step-content {
+  max-width: 45%;
+  text-align: left;
+}
+
+/* Step Titles */
+.step-content h3 {
+  font-size: 30px;
+  font-weight: 800;
+  color: #00775C;
+  margin-bottom: 12px;
+  text-transform: capitalize;
+}
+
+/* Step Descriptions */
+.step-content p {
+  font-size: 20px;
+  color: #444;
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+/* Fade-in Scroll Effect */
+@keyframes fadeInSlide {
+  from {
+      opacity: 0;
+      transform: translateY(50px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* CTA Button */
+.cta-button {
+  display: inline-block;
+  margin-top: 70px;
+  padding: 20px 40px;
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  background: linear-gradient(45deg, #00A676, #9EE493);
+  color: white;
+  border-radius: 12px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  text-decoration: none;
+  box-shadow: 0px 5px 15px rgba(0, 167, 118, 0.3);
+}
+
+.cta-button:hover {
+  transform: scale(1.12);
+  box-shadow: 0px 10px 25px rgba(0, 167, 118, 0.5);
+}
+
+
+
+/* App Section */
+.app-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 120px 10%;
+
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glassmorphism Effect */
+.app-content {
+  max-width: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading */
+.app-content h2 {
+  font-size: 52px;
+  font-weight: 800;
+  color: #00A676;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+}
+
+/* Subtitle */
+.app-content p {
+  font-size: 22px;
+  color: #444;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+/* Download Buttons */
+.download-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.download-buttons a img {
+  width: 180px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  border-radius: 12px;
+}
+
+/* Glowing Hover Effect */
+.download-buttons a img:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 0px 20px rgba(158, 228, 147, 0.6);
+}
+
+/* App Image */
+.app-image img {
+  width: 420px;
+  box-shadow: 0px 15px 50px rgba(0, 0, 0, 0.2);
+  border-radius: 25px;
+  transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+}
+
+/* App Image Hover Effect */
+.app-image img:hover {
+  transform: scale(1.05) rotate(-2deg);
+  box-shadow: 0px 20px 60px rgba(0, 166, 118, 0.3);
+}
+
+/* Animation Effects */
+.fade-in {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeInUp 1.5s ease-in-out forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+      opacity: 0;
+      transform: translateY(40px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Background Animation */
+.app-section::before {
+  content: "";
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: 200px;
+  height: 200px;
+  background: #9EE493;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.3;
+  animation: moveGlow 5s infinite alternate ease-in-out;
+}
+
+@keyframes moveGlow {
+  from {
+      transform: translateY(0px);
+  }
+  to {
+      transform: translateY(30px);
+  }
+}

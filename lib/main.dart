@@ -5,20 +5,16 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:sphere/ble_devices_page.dart';
-import 'package:sphere/esp32.dart';
-import 'package:sphere/nearby_users_service.dart';
-import 'package:sphere/splash_screen.dart';
+import 'package:vetra/ble_devices_page.dart';
+import 'package:vetra/nearby_users_service.dart';
+import 'package:vetra/splash_screen.dart';
 import 'location_sharing.dart'; // Location Sharing Page
 import 'home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await _requestPermissions();
-  // await ThreatDetection.loadModels();
-  // await ThreatDetection.initNotifications();
-  runApp(SphereApp());
+  runApp(const SphereApp());
 }
 
 Future<void> _requestPermissions() async {
@@ -45,7 +41,7 @@ class SphereApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Sphere',
+      title: 'Vetra',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -219,22 +215,21 @@ class _HomePageState extends State<HomePage> {
     NearbyUsersPage(),
     LocationSharingScreen(),
     BleScannerPage(), // Heart Rate via BLE Devices
-    const ESP32IntegrationPage(), // ESP32 Page
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Sphere"),
+        title: const Text("VETRA"),
       ),
       drawer: const DrawerMenu(),
       body: pages[selectedItem],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.pink[100],
-        selectedItemColor: Colors.pink,
-        unselectedItemColor: Colors.pink[200],
+        selectedItemColor: Colors.pinkAccent[400],
+        unselectedItemColor: Colors.pink[300],
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(
@@ -243,7 +238,6 @@ class _HomePageState extends State<HomePage> {
               icon: Icon(Icons.location_on), label: "Location"),
           BottomNavigationBarItem(
               icon: Icon(Icons.favorite), label: "Heart Rate"),
-          BottomNavigationBarItem(icon: Icon(Icons.bluetooth), label: "ESP32"),
         ],
         currentIndex: selectedItem,
         onTap: (value) {

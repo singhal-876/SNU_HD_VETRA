@@ -143,9 +143,6 @@ class _LocationSharingScreenState extends State<LocationSharingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Map & Location Sharing'),
-      ),
       body: Column(
         children: [
           Expanded(

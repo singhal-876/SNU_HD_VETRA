@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'integrated_location_service.dart';
@@ -172,7 +173,25 @@ class _NearbyUsersPageState extends State<NearbyUsersPage> {
   }
 
   Future<void> _sendSOSToUsers() async {
+    // Check if we have nearby users
+    if (nearbyUsers.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('No nearby users found to send SOS.')),
+      );
+      return;
+    }
+
     try {
+      // Get current location
+      Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+      );
+
+      // Prepare the SOS message
+      // String message =
+      //     "SOS! I need help! My location: ${position.latitude}, ${position.longitude}";
+
+      // Send SOS notification to each nearby user
       for (var user in nearbyUsers) {
         await _firestore
             .collection('users')
@@ -182,16 +201,34 @@ class _NearbyUsersPageState extends State<NearbyUsersPage> {
           'type': 'SOS',
           'message':
               'Emergency! User ${userEmail ?? 'Unknown'} needs immediate assistance!',
-          'location':
-              GeoPoint(_currentPosition!.latitude, _currentPosition!.longitude),
+          'location': GeoPoint(position.latitude, position.longitude),
           'timestamp': FieldValue.serverTimestamp(),
           'from': userEmail,
           'fromId': _auth.currentUser?.uid,
         });
       }
+
+      // Also, send the SOS notification to the current user's notifications
+      await _firestore
+          .collection('users')
+          .doc(_auth.currentUser?.uid)
+          .collection('notifications')
+          .add({
+        'type': 'SOS',
+        'message':
+            'Your SOS alert has been sent! Location: ${position.latitude}, ${position.longitude}',
+        'location': GeoPoint(position.latitude, position.longitude),
+        'timestamp': FieldValue.serverTimestamp(),
+        'from': userEmail,
+        'fromId': _auth.currentUser?.uid,
+      });
+
+      // Trigger a local notification to confirm the SOS was sent
+      await showNotification();
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('SOS alert sent successfully'),
+          content: Text('SOS alert sent successfully to nearby users!'),
           backgroundColor: Colors.green,
         ),
       );
@@ -202,6 +239,30 @@ class _NearbyUsersPageState extends State<NearbyUsersPage> {
       );
     }
   }
+
+  Future<void> showNotification() async {
+    const AndroidNotificationDetails androidPlatformChannelSpecifics =
+        AndroidNotificationDetails(
+      'sos_channel', // channel id
+      'SOS Notifications', // channel name
+      channelDescription: 'Notification when SOS is triggered',
+      importance: Importance.max,
+      priority: Priority.high,
+      showWhen: false,
+    );
+    const NotificationDetails platformChannelSpecifics =
+        NotificationDetails(android: androidPlatformChannelSpecifics);
+
+    await flutterLocalNotificationsPlugin.show(
+      0, // notification id
+      'SOS Alert', // notification title
+      'Sending SOS messages and initiating call', // notification body
+      platformChannelSpecifics,
+    );
+  }
+
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
 
   void _toggleSharing() async {
     try {

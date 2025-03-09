@@ -29,12 +29,12 @@ tasks.register("clean", Delete) {
 }
 
 // android {
-//     namespace = "com.example.sphere"
-//     compileSdk = flutter.compileSdkVersion
+//     namespace = "com.example.vetra"
+//     // compileSdk = flutter.compileSdkVersion
 //     ndkVersion = flutter.ndkVersion
 
 //     defaultConfig {
-//         applicationId = "com.example.sphere"
+//         applicationId = "com.example.vetra"
 //         // You can update the following values to match your application needs.
 //         // For more information, see: https://flutter.dev/to/review-gradle-config.
 //         minSdkVersion 23

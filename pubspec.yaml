@@ -50,6 +50,7 @@ dependencies:
   vibration: ^1.7.4  
   firebase_messaging: 15.1.4  # use the latest version
   firebase_database: ^11.3.3
+  # tflite_flutter_helper: ^0.5.0
   # phone_caller: ^0.0.1
   # flutter_bluetooth_serial: ^0.4.0
   # telephony: ^0.2.0
@@ -108,6 +109,7 @@ flutter:
     - assets/images/bg_drawer_img.png
     - assets/images/watch.png
     - assets/images/logo.png
+    - assets/threat_model.tflite
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
